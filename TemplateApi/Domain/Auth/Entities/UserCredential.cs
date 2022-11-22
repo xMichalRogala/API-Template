@@ -4,6 +4,7 @@ namespace TemplateApi.Domain.Auth.Entities
 {
     public sealed class UserCredential
     {
+        public Guid Id { get; set; }
         public string Login { get; set; }
         public string Salt { get; set; }
         [Column("Password")]

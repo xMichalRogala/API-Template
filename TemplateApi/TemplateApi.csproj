@@ -18,9 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\User\Abstract\" />
-    <Folder Include="Domain\User\Concrete\" />
-    <Folder Include="Domain\User\Models\" />
+    <Folder Include="Domain\Core\Abstract\" />
+    <Folder Include="Domain\Core\Concrete\" />
   </ItemGroup>
 
   <ItemGroup>
