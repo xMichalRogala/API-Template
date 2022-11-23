@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using TemplateApi.Domain.Auth.Abstract;
 using TemplateApi.Domain.Auth.Concrete;
-using TemplateApi.Domain.Auth.DAL;
+using TemplateApi.Domain.Auth.DAL.Concrete;
 
 namespace TemplateApi.Configuration.Startup
 {

@@ -6,10 +6,10 @@ namespace TemplateApi.Domain.Core
 {
     public class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
-        private const string UserSchema = "core";
+        private const string _userSchema = "core";
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Users", UserSchema);
+            builder.ToTable("Users", _userSchema);
         }
     }
 }

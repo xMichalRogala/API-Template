@@ -5,7 +5,7 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
 {
     public class AuthDbContext : DbContext
     {
-        private const string DefaultSchema = "Auth";
+        private const string _defaultSchema = "Auth";
 
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
         {
@@ -16,7 +16,7 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema(DefaultSchema);
+            modelBuilder.HasDefaultSchema(_defaultSchema);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

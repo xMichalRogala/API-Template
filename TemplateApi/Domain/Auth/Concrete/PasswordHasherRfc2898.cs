@@ -7,20 +7,20 @@ namespace TemplateApi.Domain.Auth.Concrete
 {
     public sealed class PasswordHasherRfc2898 : IPasswordHasher
     {
-        private const int SaltSize = 16;
-        private const int KeySize = 32;
-        private HashingOptions Options { get; }
+        private const int _saltSize = 16;
+        private const int _keySize = 32;
+        private HashingOptions _options { get; }
 
         public PasswordHasherRfc2898(IOptions<HashingOptions> options)
         {
-        Options = options.Value;
+        _options = options.Value;
         }
 
         public bool Check(string key, string salt, int iterations, string password)
         {
             using (var algorithm = new Rfc2898DeriveBytes(password, Convert.FromBase64String(salt), iterations, HashAlgorithmName.SHA256))
             {
-                var keyToCheck = algorithm.GetBytes(KeySize);
+                var keyToCheck = algorithm.GetBytes(_keySize);
 
                 return keyToCheck.SequenceEqual(Convert.FromBase64String(key));
             }
@@ -28,12 +28,12 @@ namespace TemplateApi.Domain.Auth.Concrete
 
         public PasswordHashResult Hash(string password)
         {
-            using (var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Options.Iterations, HashAlgorithmName.SHA256))
+            using (var algorithm = new Rfc2898DeriveBytes(password, _saltSize, _options.Iterations, HashAlgorithmName.SHA256))
             {
-                var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
+                var key = Convert.ToBase64String(algorithm.GetBytes(_keySize));
                 var salt = Convert.ToBase64String(algorithm.Salt);
 
-                return new PasswordHashResult(salt, key, Options.Iterations);
+                return new PasswordHashResult(salt, key, _options.Iterations);
             }
         }
     }

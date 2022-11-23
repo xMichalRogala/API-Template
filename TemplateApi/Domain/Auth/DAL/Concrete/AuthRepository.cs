@@ -7,32 +7,32 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
 {
     public sealed class AuthRepository : IAuthRepository
     {
-        private readonly AuthDbContext dbContext;
+        private readonly AuthDbContext _dbContext;
 
         public AuthRepository(AuthDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task Add(UserCredential entity) 
-            => await dbContext.AddAsync(entity);
+            => await _dbContext.AddAsync(entity);
 
         public async Task<UserCredential> Find(Func<UserCredential, bool> predicate)
-            => await dbContext.UserCredentials.FindAsync(predicate);
+            => await _dbContext.UserCredentials.FindAsync(predicate);
 
         public async Task<IEnumerable<UserCredential>> Where(Expression<Func<UserCredential, bool>> predicate)
-            => await dbContext.UserCredentials.Where(predicate).ToListAsync();
+            => await _dbContext.UserCredentials.Where(predicate).ToListAsync();
 
         public async Task<IEnumerable<UserCredential>> GetAll()
-            => await dbContext.UserCredentials.ToListAsync();
+            => await _dbContext.UserCredentials.ToListAsync();
 
         public async Task<UserCredential> GetById(Guid id)
-            => await dbContext.UserCredentials.FirstOrDefaultAsync(x => x.Id == id);
+            => await _dbContext.UserCredentials.FirstOrDefaultAsync(x => x.Id == id);
 
         public void Update(UserCredential entity)
-            => dbContext.Update(entity);
+            => _dbContext.Update(entity);
 
         public void Delete(UserCredential entity)
-            => dbContext.Remove(entity);
+            => _dbContext.Remove(entity);
     }
 }
