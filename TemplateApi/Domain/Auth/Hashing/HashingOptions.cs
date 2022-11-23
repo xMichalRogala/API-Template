@@ -1,4 +1,4 @@
-﻿namespace TemplateApi.Domain.Auth.Models
+﻿namespace TemplateApi.Domain.Auth.Hashing
 {
     public sealed class HashingOptions
     {

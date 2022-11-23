@@ -2,7 +2,7 @@
 {
     public class PasswordHashResult
     {
-        public PasswordHashResult(string salt, string key, int iterations)
+        public PasswordHashResult(string salt, byte[] key, int iterations)
         {
             Salt = salt;
             Key = key;
@@ -10,7 +10,7 @@
         }
 
         public string Salt { get; set; }
-        public string Key { get; set; }
+        public byte[] Key { get; set; }
         public int Iterations { get; set; }
     }
 }

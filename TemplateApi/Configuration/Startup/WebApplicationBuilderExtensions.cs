@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
-using TemplateApi.Domain.Auth.Abstract;
-using TemplateApi.Domain.Auth.Concrete;
+using TemplateApi.Domain.Auth.DAL.Abstract;
 using TemplateApi.Domain.Auth.DAL.Concrete;
+using TemplateApi.Domain.Auth.Hashing.Abstract;
+using TemplateApi.Domain.Auth.Hashing.Concrete;
 
 namespace TemplateApi.Configuration.Startup
 {
@@ -12,6 +12,7 @@ namespace TemplateApi.Configuration.Startup
         public static WebApplicationBuilder AddCustomServices(this WebApplicationBuilder builder)
         {
             builder.Services.TryAddScoped<IPasswordHasher, PasswordHasherRfc2898>();
+            builder.Services.TryAddScoped<IAuthRepository, AuthRepository>();
 
             return builder;
         }

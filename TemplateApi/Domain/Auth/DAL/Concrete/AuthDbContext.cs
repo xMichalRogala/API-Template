@@ -17,6 +17,10 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(_defaultSchema);
+
+            modelBuilder.Entity<UserCredential>()
+                .HasIndex(x => x.Login)
+                .IsUnique();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
