@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
-using TemplateApi.Domain.Auth;
 using TemplateApi.Domain.Auth.Abstract;
 using TemplateApi.Domain.Auth.Concrete;
+using TemplateApi.Domain.Auth.DAL;
 
 namespace TemplateApi.Configuration.Startup
 {
