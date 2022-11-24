@@ -2,10 +2,15 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TemplateApi.Common.Data;
 using TemplateApi.Commons.Data.Repository;
+using TemplateApi.Commons.Endpoints.Abstract;
 using TemplateApi.Domain.Auth.DAL.Abstract;
 using TemplateApi.Domain.Auth.DAL.Concrete;
 using TemplateApi.Domain.Auth.Hashing.Abstract;
 using TemplateApi.Domain.Auth.Hashing.Concrete;
+using TemplateApi.Domain.Auth.Services.Abstract;
+using TemplateApi.Domain.Auth.Services.Concrete;
+using TemplateApi.Domain.Core.DAL.Abstract;
+using TemplateApi.Domain.Core.DAL.Concrete;
 
 namespace TemplateApi.Configuration.Startup
 {
@@ -15,7 +20,11 @@ namespace TemplateApi.Configuration.Startup
         {
             builder.Services.TryAddScoped<IPasswordHasher, PasswordHasherRfc2898>();
             builder.Services.TryAddScoped<IAuthRepository, AuthRepository>();
+            builder.Services.TryAddScoped<IAuthService, AuthService>();
             builder.Services.TryAddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            builder.Services.TryAddScoped<IUnitOfWork, UnitOfWork>();
+
+            AddServicesFromEndpoints(builder.Services);
 
             return builder;
         }
@@ -50,6 +59,21 @@ namespace TemplateApi.Configuration.Startup
         {
             optionsBuilder.EnableDetailedErrors();
             optionsBuilder.EnableSensitiveDataLogging();
+        }
+
+        private static void AddServicesFromEndpoints(IServiceCollection services)
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var endpointTypes = assembly.GetTypes()
+                    .Where(x => !x.IsAbstract && !x.IsInterface && typeof(IEndpoints).IsAssignableFrom(x));
+
+                foreach (var endpointType in endpointTypes)
+                {
+                    endpointType.GetMethod(nameof(IEndpoints.AddServices))
+                        !.Invoke(null, new object[] { services });
+                }
+            }
         }
     }
 }

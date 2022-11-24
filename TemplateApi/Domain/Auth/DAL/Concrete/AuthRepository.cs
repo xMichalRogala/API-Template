@@ -34,5 +34,8 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
 
         public void Delete(UserCredential entity)
             => _dbContext.Remove(entity);
+
+        public async Task<int> SaveChangesAsync()
+            => await _dbContext.SaveChangesAsync();
     }
 }

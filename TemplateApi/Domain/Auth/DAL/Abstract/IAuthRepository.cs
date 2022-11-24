@@ -5,5 +5,6 @@ namespace TemplateApi.Domain.Auth.DAL.Abstract
 {
     public interface IAuthRepository : IGenericRepository<UserCredential, Guid>
     {
+        Task<int> SaveChangesAsync();
     }
 }

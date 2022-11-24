@@ -6,7 +6,7 @@ namespace TemplateApi.Domain.Core.DAL
 {
     public class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
-        private const string _userSchema = "core";
+        private const string _userSchema = "Core";
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users", _userSchema);

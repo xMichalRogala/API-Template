@@ -16,6 +16,18 @@ namespace TemplateApi.Domain.Auth.Services.Concrete
             _passwordHasher = passwordHasher;
         }
 
+        public async Task<bool> RemoveUserCredentials(string login)
+        {
+            var userCredential = await _authRepository.Find(x => x.Login.ToLower() == login.ToLower());
+
+            if (userCredential == null)
+                return false;
+
+            _authRepository.Delete(userCredential);
+
+            return await _authRepository.SaveChangesAsync() > 0;
+        }
+
         public async Task SaveUserCredentials(string login, string password)
         {
             var hashResult = _passwordHasher.Hash(password);
@@ -27,6 +39,8 @@ namespace TemplateApi.Domain.Auth.Services.Concrete
                 Salt = hashResult.Salt,
                 PasswordBytes = hashResult.Key
             });
+
+            await _authRepository.SaveChangesAsync();
         }
 
         public async Task<bool> ValidatePassword(string login, string password)

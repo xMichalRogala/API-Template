@@ -12,11 +12,11 @@ namespace TemplateApi.Migrations.ApplicationDb
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "core");
+                name: "Core");
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                schema: "core",
+                schema: "Core",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -34,7 +34,7 @@ namespace TemplateApi.Migrations.ApplicationDb
         {
             migrationBuilder.DropTable(
                 name: "Users",
-                schema: "core");
+                schema: "Core");
         }
     }
 }
