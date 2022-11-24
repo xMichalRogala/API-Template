@@ -1,6 +1,6 @@
 ﻿using TemplateApi.Commons.Endpoints.Abstract;
 
-namespace TemplateApi.Configuration.Startup
+namespace TemplateApi.Configuration.Extensions
 {
     public static class WebApplicationExtensions
     {

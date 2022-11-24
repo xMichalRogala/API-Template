@@ -1,4 +1,4 @@
-using TemplateApi.Configuration.Startup;
+using TemplateApi.Configuration.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

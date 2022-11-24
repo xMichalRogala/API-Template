@@ -12,7 +12,7 @@ using TemplateApi.Domain.Auth.Services.Concrete;
 using TemplateApi.Domain.Core.DAL.Abstract;
 using TemplateApi.Domain.Core.DAL.Concrete;
 
-namespace TemplateApi.Configuration.Startup
+namespace TemplateApi.Configuration.Extensions
 {
     public static class WebApplicationBuilderExtensions
     {
