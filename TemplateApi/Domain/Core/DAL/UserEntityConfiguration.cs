@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TemplateApi.Domain.Core.Models;
+using TemplateApi.Domain.Core.Entities;
 
-namespace TemplateApi.Domain.Core
+namespace TemplateApi.Domain.Core.DAL
 {
     public class UserEntityConfiguration : IEntityTypeConfiguration<User>
     {
@@ -10,6 +10,9 @@ namespace TemplateApi.Domain.Core
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users", _userSchema);
+
+            builder.HasIndex(x => x.Login)
+                .IsUnique();
         }
     }
 }

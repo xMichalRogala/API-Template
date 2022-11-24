@@ -20,6 +20,8 @@
   <ItemGroup>
     <Folder Include="Domain\Core\Abstract\" />
     <Folder Include="Domain\Core\Concrete\" />
+    <Folder Include="Domain\Core\Models\" />
+    <Folder Include="Domain\Core\Controllers\" />
   </ItemGroup>
 
   <ItemGroup>

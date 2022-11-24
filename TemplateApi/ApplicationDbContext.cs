@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TemplateApi.Domain.Core;
-using TemplateApi.Domain.Core.Models;
+using TemplateApi.Domain.Core.DAL;
+using TemplateApi.Domain.Core.Entities;
 
 namespace TemplateApi
 {

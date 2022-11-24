@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using TemplateApi.Common.Data;
+using TemplateApi.Commons.Data.Repository;
 using TemplateApi.Domain.Auth.DAL.Abstract;
 using TemplateApi.Domain.Auth.DAL.Concrete;
 using TemplateApi.Domain.Auth.Hashing.Abstract;
@@ -13,6 +15,7 @@ namespace TemplateApi.Configuration.Startup
         {
             builder.Services.TryAddScoped<IPasswordHasher, PasswordHasherRfc2898>();
             builder.Services.TryAddScoped<IAuthRepository, AuthRepository>();
+            builder.Services.TryAddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
 
             return builder;
         }
