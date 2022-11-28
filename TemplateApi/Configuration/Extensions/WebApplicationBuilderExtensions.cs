@@ -18,9 +18,6 @@ namespace TemplateApi.Configuration.Extensions
     {
         public static WebApplicationBuilder AddCustomServices(this WebApplicationBuilder builder)
         {
-            builder.Services.TryAddScoped<IPasswordHasher, PasswordHasherRfc2898>();
-            builder.Services.TryAddScoped<IAuthRepository, AuthRepository>();
-            builder.Services.TryAddScoped<IAuthService, AuthService>();
             builder.Services.TryAddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.TryAddScoped<IUnitOfWork, UnitOfWork>();
 

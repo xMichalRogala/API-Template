@@ -24,8 +24,8 @@ namespace TemplateApi.Common.Data
             _dbContext.Remove(entity);
         }
 
-        public async Task<T> Find(Func<T, bool> predicate) 
-            => await _dbContext.FindAsync<T>(predicate);
+        public async Task<T> Find(Expression<Func<T, bool>> predicate) 
+            => await _entities.SingleOrDefaultAsync(predicate);
 
         public async Task<IEnumerable<T>> GetAll() 
             => await _entities.ToListAsync();

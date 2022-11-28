@@ -17,8 +17,8 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
         public async Task Add(UserCredential entity) 
             => await _dbContext.AddAsync(entity);
 
-        public async Task<UserCredential> Find(Func<UserCredential, bool> predicate)
-            => await _dbContext.UserCredentials.FindAsync(predicate);
+        public async Task<UserCredential> Find(Expression<Func<UserCredential, bool>> predicate)
+            => await _dbContext.UserCredentials.SingleOrDefaultAsync(predicate);
 
         public async Task<IEnumerable<UserCredential>> Where(Expression<Func<UserCredential, bool>> predicate)
             => await _dbContext.UserCredentials.Where(predicate).ToListAsync();
