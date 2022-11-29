@@ -1,6 +1,7 @@
 ﻿using TemplateApi.Domain.Auth.DAL.Abstract;
 using TemplateApi.Domain.Auth.Entities;
 using TemplateApi.Domain.Auth.Hashing.Abstract;
+using TemplateApi.Domain.Auth.Jwt;
 using TemplateApi.Domain.Auth.Services.Abstract;
 
 namespace TemplateApi.Domain.Auth.Services.Concrete
@@ -9,11 +10,13 @@ namespace TemplateApi.Domain.Auth.Services.Concrete
     {
         private readonly IAuthRepository _authRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private readonly IJwtProvider _jwtProvider;
 
-        public AuthService(IAuthRepository authRepository, IPasswordHasher passwordHasher)
+        public AuthService(IAuthRepository authRepository, IPasswordHasher passwordHasher, IJwtProvider jwtProvider)
         {
             _authRepository = authRepository;
             _passwordHasher = passwordHasher;
+            _jwtProvider = jwtProvider;
         }
 
         public async Task<bool> RemoveUserCredentials(string login)
@@ -43,12 +46,15 @@ namespace TemplateApi.Domain.Auth.Services.Concrete
             await _authRepository.SaveChangesAsync();
         }
 
-        public async Task<bool> ValidatePassword(string login, string password)
+        public async Task<string> ValidatePassword(string login, string password)
         {
             var userCredential = await _authRepository.Find(x => x.Login == login)
                 ?? throw new ArgumentNullException($"There are any userCredentials for login: {login}");
 
-            return _passwordHasher.Check(userCredential.PasswordBytes, userCredential.Salt, userCredential.Iterations, password);
+            if (!_passwordHasher.Check(userCredential.PasswordBytes, userCredential.Salt, userCredential.Iterations, password))
+                return string.Empty;
+
+            return _jwtProvider.GenerateToken(userCredential);
         }
     }
 }

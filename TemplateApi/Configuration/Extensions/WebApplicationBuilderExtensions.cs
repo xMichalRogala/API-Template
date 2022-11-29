@@ -3,12 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using TemplateApi.Common.Data;
 using TemplateApi.Commons.Data.Repository;
 using TemplateApi.Commons.Endpoints.Abstract;
-using TemplateApi.Domain.Auth.DAL.Abstract;
 using TemplateApi.Domain.Auth.DAL.Concrete;
-using TemplateApi.Domain.Auth.Hashing.Abstract;
-using TemplateApi.Domain.Auth.Hashing.Concrete;
-using TemplateApi.Domain.Auth.Services.Abstract;
-using TemplateApi.Domain.Auth.Services.Concrete;
 using TemplateApi.Domain.Core.DAL.Abstract;
 using TemplateApi.Domain.Core.DAL.Concrete;
 
