@@ -17,8 +17,8 @@ namespace TemplateApi.Domain.Core.DAL.Concrete
 
         public IGenericRepository<User, Guid> userRepository => _userRepository ?? new GenericRepository<User, Guid>(_dbContext);
 
-        public async Task<bool> Complete()
-            => await _dbContext.SaveChangesAsync() > 0;
+        public async Task<bool> Complete(CancellationToken cancellationToken = default)
+            => await _dbContext.SaveChangesAsync(cancellationToken) > 0;
 
         public void Dispose()
         {

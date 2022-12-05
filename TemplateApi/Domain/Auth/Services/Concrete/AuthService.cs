@@ -19,19 +19,19 @@ namespace TemplateApi.Domain.Auth.Services.Concrete
             _jwtProvider = jwtProvider;
         }
 
-        public async Task<bool> RemoveUserCredentials(string login)
+        public async Task<bool> RemoveUserCredentials(string login, CancellationToken cancellationToken = default)
         {
-            var userCredential = await _authRepository.Find(x => x.Login.ToLower() == login.ToLower());
+            var userCredential = await _authRepository.Find(x => x.Login.ToLower() == login.ToLower(), cancellationToken);
 
             if (userCredential == null)
                 return false;
 
             _authRepository.Delete(userCredential);
 
-            return await _authRepository.SaveChangesAsync() > 0;
+            return await _authRepository.SaveChangesAsync(cancellationToken) > 0;
         }
 
-        public async Task SaveUserCredentials(string login, string password)
+        public async Task SaveUserCredentials(string login, string password, CancellationToken cancellationToken = default)
         {
             var hashResult = _passwordHasher.Hash(password);
 
@@ -41,14 +41,14 @@ namespace TemplateApi.Domain.Auth.Services.Concrete
                 Login = login,
                 Salt = hashResult.Salt,
                 PasswordBytes = hashResult.Key
-            });
+            }, cancellationToken);
 
-            await _authRepository.SaveChangesAsync();
+            await _authRepository.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<string> ValidatePassword(string login, string password)
+        public async Task<string> ValidatePassword(string login, string password, CancellationToken cancellationToken = default)
         {
-            var userCredential = await _authRepository.Find(x => x.Login == login)
+            var userCredential = await _authRepository.Find(x => x.Login == login, cancellationToken)
                 ?? throw new ArgumentNullException($"There are any userCredentials for login: {login}");
 
             if (!_passwordHasher.Check(userCredential.PasswordBytes, userCredential.Salt, userCredential.Iterations, password))

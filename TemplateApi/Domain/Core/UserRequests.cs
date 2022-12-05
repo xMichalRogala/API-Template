@@ -1,4 +1,5 @@
-﻿using TemplateApi.Domain.Auth.Services.Abstract;
+﻿using Microsoft.AspNetCore.Mvc;
+using TemplateApi.Domain.Auth.Services.Abstract;
 using TemplateApi.Domain.Core.DAL.Abstract;
 using TemplateApi.Domain.Core.Entities;
 using TemplateApi.Domain.Core.Models;
@@ -7,7 +8,10 @@ namespace TemplateApi.Domain.Core
 {
     public class UserRequests
     {
-        public async static Task<IResult> Create(UserDto userDto, IAuthService authService, IUnitOfWork unitOfWork)
+        public async static Task<IResult> Create([FromBody] UserDto userDto, 
+            IAuthService authService, 
+            IUnitOfWork unitOfWork, 
+            CancellationToken cancellationToken)
         {
             var user = new User
             {
@@ -15,14 +19,14 @@ namespace TemplateApi.Domain.Core
                 LastName = userDto.LastName,
                 Login = userDto.Login
             };
-            await unitOfWork.userRepository.Add(user);
+            await unitOfWork.userRepository.Add(user, cancellationToken);
 
-            await authService.SaveUserCredentials(userDto.Login, userDto.Password);
+            await authService.SaveUserCredentials(userDto.Login, userDto.Password, cancellationToken);
 
             var resultOfWork = await unitOfWork.Complete();
 
             if (!resultOfWork)
-                await authService.RemoveUserCredentials(userDto.Login);
+                await authService.RemoveUserCredentials(userDto.Login, cancellationToken);
 
             return Results.Ok();
         }

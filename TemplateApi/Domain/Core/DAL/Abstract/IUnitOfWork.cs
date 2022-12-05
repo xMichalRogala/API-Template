@@ -7,6 +7,6 @@ namespace TemplateApi.Domain.Core.DAL.Abstract
     {
         IGenericRepository<User, Guid> userRepository { get; }
 
-        Task<bool> Complete();
+        Task<bool> Complete(CancellationToken cancellationToken = default);
     }
 }

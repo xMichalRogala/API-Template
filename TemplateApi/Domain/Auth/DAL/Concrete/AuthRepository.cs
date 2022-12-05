@@ -14,20 +14,20 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
             _dbContext = dbContext;
         }
 
-        public async Task Add(UserCredential entity) 
-            => await _dbContext.AddAsync(entity);
+        public async Task Add(UserCredential entity, CancellationToken cancellationToken = default) 
+            => await _dbContext.AddAsync(entity, cancellationToken);
 
-        public async Task<UserCredential> Find(Expression<Func<UserCredential, bool>> predicate)
-            => await _dbContext.UserCredentials.SingleOrDefaultAsync(predicate);
+        public async Task<UserCredential> Find(Expression<Func<UserCredential, bool>> predicate, CancellationToken cancellationToken = default)
+            => await _dbContext.UserCredentials.SingleOrDefaultAsync(predicate, cancellationToken);
 
-        public async Task<IEnumerable<UserCredential>> Where(Expression<Func<UserCredential, bool>> predicate)
-            => await _dbContext.UserCredentials.Where(predicate).ToListAsync();
+        public async Task<IEnumerable<UserCredential>> Where(Expression<Func<UserCredential, bool>> predicate, CancellationToken cancellationToken = default)
+            => await _dbContext.UserCredentials.Where(predicate).ToListAsync(cancellationToken);
 
-        public async Task<IEnumerable<UserCredential>> GetAll()
-            => await _dbContext.UserCredentials.ToListAsync();
+        public async Task<IEnumerable<UserCredential>> GetAll(CancellationToken cancellationToken = default)
+            => await _dbContext.UserCredentials.ToListAsync(cancellationToken);
 
-        public async Task<UserCredential> GetById(Guid id)
-            => await _dbContext.UserCredentials.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<UserCredential> GetById(Guid id, CancellationToken cancellationToken = default)
+            => await _dbContext.UserCredentials.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         public void Update(UserCredential entity)
             => _dbContext.Update(entity);
@@ -35,7 +35,7 @@ namespace TemplateApi.Domain.Auth.DAL.Concrete
         public void Delete(UserCredential entity)
             => _dbContext.Remove(entity);
 
-        public async Task<int> SaveChangesAsync()
-            => await _dbContext.SaveChangesAsync();
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+            => await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }
