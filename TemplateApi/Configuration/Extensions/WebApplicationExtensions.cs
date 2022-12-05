@@ -1,4 +1,5 @@
 ﻿using TemplateApi.Commons.Endpoints.Abstract;
+using TemplateApi.Middlewares;
 
 namespace TemplateApi.Configuration.Extensions
 {
@@ -6,6 +7,7 @@ namespace TemplateApi.Configuration.Extensions
     {
         public static WebApplication AddCustomMiddlewares(this WebApplication application)
         {
+            application.UseMiddleware<OperationCanceledMiddleware>();
 
             return application;
         }
