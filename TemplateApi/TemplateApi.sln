@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateApi", "TemplateApi.csproj", "{4B1F17FC-B487-47C9-8F53-C3470CF29672}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateApi.Commons", "..\TemplateApi.Commons\TemplateApi.Commons.csproj", "{ED7C0275-D145-429B-99E4-D76BF2711656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateApi.Commons", "..\TemplateApi.Commons\TemplateApi.Commons.csproj", "{ED7C0275-D145-429B-99E4-D76BF2711656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.Domain", "..\Auth.Domain\Auth.Domain.csproj", "{0CE7667E-3161-4E03-BFBD-7F175D8F2344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{ED7C0275-D145-429B-99E4-D76BF2711656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED7C0275-D145-429B-99E4-D76BF2711656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED7C0275-D145-429B-99E4-D76BF2711656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE7667E-3161-4E03-BFBD-7F175D8F2344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE7667E-3161-4E03-BFBD-7F175D8F2344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE7667E-3161-4E03-BFBD-7F175D8F2344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE7667E-3161-4E03-BFBD-7F175D8F2344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

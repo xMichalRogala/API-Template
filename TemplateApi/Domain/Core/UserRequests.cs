@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TemplateApi.Domain.Auth.Services.Abstract;
+using Auth.Domain.Services.Abstract;
 using TemplateApi.Domain.Core.DAL.Abstract;
 using TemplateApi.Domain.Core.Entities;
 using TemplateApi.Domain.Core.Models;
