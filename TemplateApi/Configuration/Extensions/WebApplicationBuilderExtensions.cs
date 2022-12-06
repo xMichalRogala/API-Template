@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using TemplateApi.Application.Abstract;
 using TemplateApi.Common.Data;
 using TemplateApi.Commons.Data.Repository;
 using TemplateApi.Commons.Endpoints.Abstract;
-using Auth.Domain.DAL.Concrete;
-using TemplateApi.Domain.Core.DAL.Abstract;
-using TemplateApi.Domain.Core.DAL.Concrete;
-using System.Reflection;
+using TemplateApi.Persistence;
+using TemplateApi.Persistence.DbContexts.Application;
+using TemplateApi.Persistence.DbContexts.Auth;
 
 namespace TemplateApi.Configuration.Extensions
 {

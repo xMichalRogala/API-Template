@@ -16,12 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Core\Abstract\" />
-    <Folder Include="Domain\Core\Concrete\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Auth.Domain\Auth.Domain.csproj" />
+    <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
+    <ProjectReference Include="..\TemplateApi.Application\TemplateApi.Application.csproj" />
+    <ProjectReference Include="..\TemplateApi.Persistence\TemplateApi.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

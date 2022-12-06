@@ -1,7 +1,7 @@
-﻿using Auth.Domain.DAL.Abstract;
-using Auth.Domain.Entities;
+﻿using Auth.Domain.Entities;
 using Auth.Domain.Hashing.Abstract;
 using Auth.Domain.Jwt;
+using Auth.Domain.Repositories.Abstract;
 using Auth.Domain.Services.Abstract;
 
 namespace Auth.Domain.Services.Concrete
