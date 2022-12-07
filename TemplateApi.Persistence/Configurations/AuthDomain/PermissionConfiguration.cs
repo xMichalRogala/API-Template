@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Auth.Domain.Entities;
 using TemplateApi.Persistence.Constants;
+using TemplateApi.Persistence.Markers;
 
 namespace TemplateApi.Persistence.Configurations.AuthDomain
 {
-    internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permission>
+    internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permission>, IAuthConfiguration
     {
         public void Configure(EntityTypeBuilder<Permission> builder)
         {

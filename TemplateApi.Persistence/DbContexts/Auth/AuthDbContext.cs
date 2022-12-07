@@ -1,6 +1,8 @@
 ﻿using Auth.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using TemplateApi.Persistence.Configurations.AuthDomain;
+using TemplateApi.Persistence.Markers;
 
 namespace TemplateApi.Persistence.DbContexts.Auth
 {
@@ -19,7 +21,7 @@ namespace TemplateApi.Persistence.DbContexts.Auth
         {
             modelBuilder.HasDefaultSchema(_defaultSchema);
 
-            modelBuilder.ApplyConfiguration(new PermissionConfiguration()); //todo create empty mark interface or use default and load with reflection
+            modelBuilder.ApplyConfiguration(new PermissionConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new RolePermissionConfiguration());
             modelBuilder.ApplyConfiguration(new UserCredentialConfiguration());

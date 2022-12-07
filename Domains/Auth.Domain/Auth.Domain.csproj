@@ -14,11 +14,10 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TemplateApi.Commons\TemplateApi.Commons.csproj" />
-  </ItemGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\TemplateApi.Commons\TemplateApi.Commons.csproj" />
 	</ItemGroup>
 </Project>

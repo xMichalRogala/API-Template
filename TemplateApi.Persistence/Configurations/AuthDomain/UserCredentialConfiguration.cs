@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Auth.Domain.Entities;
 using TemplateApi.Persistence.Constants;
+using TemplateApi.Persistence.Markers;
 
 namespace TemplateApi.Persistence.Configurations.AuthDomain
 {
-    public class UserCredentialConfiguration : IEntityTypeConfiguration<UserCredential>
+    public class UserCredentialConfiguration : IEntityTypeConfiguration<UserCredential>, IAuthConfiguration
     {
         public void Configure(EntityTypeBuilder<UserCredential> builder)
         {

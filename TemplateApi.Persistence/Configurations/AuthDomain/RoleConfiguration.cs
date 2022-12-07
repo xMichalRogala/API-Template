@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Auth.Domain.Entities;
 using TemplateApi.Persistence.Constants;
+using TemplateApi.Persistence.Markers;
 
 namespace TemplateApi.Persistence.Configurations.AuthDomain
 {
-    public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>, IAuthConfiguration
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {

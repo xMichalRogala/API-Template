@@ -24,15 +24,15 @@ namespace TemplateApi.Commons.Enums.Abstract
             return fieldsForType.ToDictionary(x => x.Id);
         }
 
-        protected Enumeration(int value, string name)
+        protected Enumeration(int id, string name)
         {
-            Id = value;
+            Id = id;
             Name = name;
         }
 
-        public static TEnum? FromValue(int value)
+        public static TEnum? FromValue(int id)
         {
-            return EnumerationDict.TryGetValue(value, out TEnum? enumeration) ? enumeration : default;
+            return EnumerationDict.TryGetValue(id, out TEnum? enumeration) ? enumeration : default;
         }
 
         public static TEnum? FromName(string name)

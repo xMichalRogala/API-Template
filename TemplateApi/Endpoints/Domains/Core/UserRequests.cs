@@ -4,7 +4,7 @@ using Core.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using TemplateApi.Application.Abstract;
 
-namespace TemplateApi.Endpoints.Domains.Core
+namespace Core.Domain
 {
     public class UserRequests
     {
