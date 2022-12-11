@@ -1,4 +1,4 @@
-﻿namespace Core.Domain.Models
+﻿namespace Core.Domain.Schemas.Models
 {
     public class UserDto
     {

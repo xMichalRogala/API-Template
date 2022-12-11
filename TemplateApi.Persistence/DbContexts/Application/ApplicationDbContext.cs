@@ -1,4 +1,4 @@
-﻿using Core.Domain.Entities;
+﻿using Core.Domain.Schemas.Entities;
 using Microsoft.EntityFrameworkCore;
 using TemplateApi.Persistence.Configurations.CoreDomain;
 

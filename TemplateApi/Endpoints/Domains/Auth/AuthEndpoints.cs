@@ -1,15 +1,15 @@
 ﻿using Auth.Domain.Hashing.Abstract;
 using Auth.Domain.Hashing.Concrete;
 using Auth.Domain.Jwt;
-using Auth.Domain.Models;
 using Auth.Domain.OptionsSetup;
 using Auth.Domain.Repositories.Abstract;
+using Auth.Domain.Repositories.Concrete;
+using Auth.Domain.Schemas.Models;
 using Auth.Domain.Services.Abstract;
 using Auth.Domain.Services.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TemplateApi.Commons.Endpoints.Abstract;
-using TemplateApi.Persistence.Concrete;
 
 namespace TemplateApi.Endpoints.Domains.Auth
 {
@@ -37,8 +37,7 @@ namespace TemplateApi.Endpoints.Domains.Auth
                 .WithName("SignIn")
                 .Accepts<SignInDto>(ContentType)
                 .Produces<string>(200)
-                .Produces(400)
-                .WithTags(EndpointName);
+                .Produces(400);
         }
     }
 }

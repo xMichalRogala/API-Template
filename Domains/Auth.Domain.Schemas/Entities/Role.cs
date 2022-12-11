@@ -1,6 +1,6 @@
 ﻿using TemplateApi.Commons.Enums.Abstract;
 
-namespace Auth.Domain.Entities
+namespace Auth.Domain.Schemas.Entities
 {
     public sealed class Role : Enumeration<Role>
     {

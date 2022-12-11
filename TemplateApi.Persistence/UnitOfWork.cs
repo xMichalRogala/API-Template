@@ -1,4 +1,4 @@
-﻿using Core.Domain.Entities;
+﻿using Core.Domain.Schemas.Entities;
 using TemplateApi.Application.Abstract;
 using TemplateApi.Common.Data;
 using TemplateApi.Commons.Data.Repository;

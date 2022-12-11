@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Auth.Domain.Entities;
+using Auth.Domain.Schemas.Entities;
 using TemplateApi.Persistence.Constants;
 using TemplateApi.Persistence.Markers;
 
@@ -15,7 +15,7 @@ namespace TemplateApi.Persistence.Configurations.AuthDomain
             builder.HasKey(p => p.Id);
 
             IEnumerable<Permission> permissions = Enum
-                .GetValues<Auth.Domain.Enums.Permission>()
+                .GetValues<Auth.Domain.Schemas.Enums.Permission>()
                 .Select(p => new Permission
                 {
                     Id = (int)p,

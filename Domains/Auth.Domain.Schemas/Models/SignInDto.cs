@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Auth.Domain.Models
+namespace Auth.Domain.Schemas.Models
 {
     public class SignInDto
     {

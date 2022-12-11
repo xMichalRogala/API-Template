@@ -1,9 +1,6 @@
-using Auth.Domain.Models;
 using TemplateApi.Configuration.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var hehe = new SignInDto();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Entities;
+﻿using Auth.Domain.Schemas.Entities;
 
 namespace Auth.Domain.Jwt
 {

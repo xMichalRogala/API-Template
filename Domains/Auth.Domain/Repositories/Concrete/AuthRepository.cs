@@ -1,10 +1,10 @@
-﻿using Auth.Domain.Entities;
+﻿using System.Linq.Expressions;
 using Auth.Domain.Repositories.Abstract;
+using Auth.Domain.Schemas.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 using TemplateApi.Persistence.DbContexts.Auth;
 
-namespace TemplateApi.Persistence.Concrete
+namespace Auth.Domain.Repositories.Concrete
 {
     public sealed class AuthRepository : IAuthRepository
     {

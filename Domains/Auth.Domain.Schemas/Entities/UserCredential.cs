@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TemplateApi.Commons.Entity.Abstract;
 
-namespace Auth.Domain.Entities
+namespace Auth.Domain.Schemas.Entities
 {
     public sealed class UserCredential : EntityBase<Guid>
     {

@@ -7,12 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domains\Auth.Domain\Auth.Domain.csproj" />
+    <ProjectReference Include="..\Domains\Auth.Domain.Schemas\Auth.Domain.Schemas.csproj" />
+    <ProjectReference Include="..\Domains\Core.Domain.Schemas\Core.Domain.Schemas.csproj" />
     <ProjectReference Include="..\TemplateApi.Application\TemplateApi.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Abstract\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
   </ItemGroup>
 
 </Project>

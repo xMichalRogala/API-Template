@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Auth.Domain.Entities;
+using Auth.Domain.Schemas.Entities;
 using TemplateApi.Persistence.Constants;
 using TemplateApi.Persistence.Markers;
 

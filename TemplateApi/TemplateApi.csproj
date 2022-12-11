@@ -16,17 +16,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TemplateApi.Application\TemplateApi.Application.csproj" />
-    <ProjectReference Include="..\TemplateApi.Persistence\TemplateApi.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="appsettings.Development.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domains\Auth.Domain\Auth.Domain.csproj" />
+    <ProjectReference Include="..\Domains\Core.Domain\Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

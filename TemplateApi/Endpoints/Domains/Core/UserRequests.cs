@@ -1,14 +1,14 @@
 ﻿using Auth.Domain.Services.Abstract;
-using Core.Domain.Entities;
-using Core.Domain.Models;
+using Core.Domain.Schemas.Entities;
+using Core.Domain.Schemas.Models;
 using Microsoft.AspNetCore.Mvc;
 using TemplateApi.Application.Abstract;
 
-namespace Core.Domain
+namespace TemplateApi.Endpoints.Domains.Core
 {
-    public class UserRequests
+    public abstract class UserRequests
     {
-        public async static Task<IResult> Create([FromBody] UserDto userDto,
+        public static async Task<IResult> Create([FromBody] UserDto userDto,
             IAuthService authService,
             IUnitOfWork unitOfWork,
             CancellationToken cancellationToken)
@@ -23,7 +23,7 @@ namespace Core.Domain
 
             await authService.SaveUserCredentials(userDto.Login, userDto.Password, cancellationToken);
 
-            var resultOfWork = await unitOfWork.Complete();
+            var resultOfWork = await unitOfWork.Complete(cancellationToken);
 
             if (!resultOfWork)
                 await authService.RemoveUserCredentials(userDto.Login, cancellationToken);

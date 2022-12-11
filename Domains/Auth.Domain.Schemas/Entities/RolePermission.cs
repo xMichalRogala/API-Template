@@ -1,4 +1,4 @@
-﻿namespace Auth.Domain.Entities
+﻿namespace Auth.Domain.Schemas.Entities
 {
     public class RolePermission
     {

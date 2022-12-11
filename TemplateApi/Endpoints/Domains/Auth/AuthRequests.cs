@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Auth.Domain.Schemas.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Auth.Domain.Models;
 using Auth.Domain.Services.Abstract;
-using Microsoft.AspNetCore.Http;
 
 namespace TemplateApi.Endpoints.Domains.Auth
 {
-    public class AuthRequests
+    public abstract class AuthRequests
     {
         [AllowAnonymous]
-        public async static Task<IResult> SignIn([FromBody] SignInDto signInDto,
+        public static async Task<IResult> SignIn([FromBody] SignInDto signInDto,
             IAuthService authService,
             CancellationToken cancellationToken)
         {

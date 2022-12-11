@@ -1,6 +1,6 @@
-﻿using Auth.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Auth.Domain.Schemas.Entities;
 using TemplateApi.Persistence.Configurations.AuthDomain;
 using TemplateApi.Persistence.Markers;
 

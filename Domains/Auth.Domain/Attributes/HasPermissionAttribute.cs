@@ -1,4 +1,4 @@
-﻿using Auth.Domain.Enums;
+﻿using Auth.Domain.Schemas.Entities;
 using Microsoft.AspNetCore.Authorization;
 
 namespace  Auth.Domain.Attributes

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Security.Cryptography;
 using Auth.Domain.Hashing.Abstract;
-using Auth.Domain.Models;
+using Auth.Domain.Schemas.Models;
 
 namespace Auth.Domain.Hashing.Concrete
 {

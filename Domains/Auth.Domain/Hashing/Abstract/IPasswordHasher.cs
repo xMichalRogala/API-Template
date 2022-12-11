@@ -1,4 +1,6 @@
-﻿using Auth.Domain.Models;
+﻿
+
+using Auth.Domain.Schemas.Models;
 
 namespace Auth.Domain.Hashing.Abstract
 {

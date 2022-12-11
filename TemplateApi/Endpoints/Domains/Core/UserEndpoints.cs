@@ -1,10 +1,12 @@
-﻿using Core.Domain.Models;
+﻿using Core.Domain.Schemas.Models;
 using TemplateApi.Commons.Endpoints.Abstract;
 
 namespace TemplateApi.Endpoints.Domains.Core
 {
     internal sealed class UserEndpoints : IEndpoints
     {
+        private const string EndpointName = "Users";
+        private const string ContentType = "application/json";
         public static void AddServices(IServiceCollection services)
         {
 
@@ -12,9 +14,9 @@ namespace TemplateApi.Endpoints.Domains.Core
 
         public static void DefineEndpoints(IEndpointRouteBuilder app)
         {
-            app.MapPost("users", UserRequests.Create)
+            app.MapPost(EndpointName, UserRequests.Create)
                 .WithName("CreateUser")
-                .Accepts<UserDto>("application/json");
+                .Accepts<UserDto>(ContentType);
         }
     }
 }

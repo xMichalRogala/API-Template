@@ -1,5 +1,6 @@
-﻿using TemplateApi.Commons.Data.Repository;
-using Auth.Domain.Entities;
+﻿using Auth.Domain.Schemas.Entities;
+using TemplateApi.Commons.Data.Repository;
+
 
 namespace Auth.Domain.Repositories.Abstract
 {

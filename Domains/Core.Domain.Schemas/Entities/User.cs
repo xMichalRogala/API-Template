@@ -1,6 +1,6 @@
 ﻿using TemplateApi.Commons.Entity.Abstract;
 
-namespace Core.Domain.Entities
+namespace Core.Domain.Schemas.Entities
 {
     public class User : EntityBase<Guid>
     {

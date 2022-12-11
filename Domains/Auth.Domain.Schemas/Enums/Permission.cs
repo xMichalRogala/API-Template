@@ -1,4 +1,4 @@
-﻿namespace Auth.Domain.Enums
+﻿namespace Auth.Domain.Schemas.Enums
 {
     public enum Permission
     {

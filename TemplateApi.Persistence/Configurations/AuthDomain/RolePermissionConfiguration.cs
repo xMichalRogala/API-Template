@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Auth.Domain.Entities;
-using Permission = Auth.Domain.Enums.Permission;
+using Auth.Domain.Schemas.Entities;
+using Permission = Auth.Domain.Schemas.Enums.Permission;
 using TemplateApi.Persistence.Markers;
 
 namespace TemplateApi.Persistence.Configurations.AuthDomain
