@@ -30,19 +30,19 @@ namespace TemplateApi.Commons.Enums.Abstract
             Name = name;
         }
 
-        public static TEnum? FromValue(int id)
+        public static TEnum FromValue(int id)
         {
-            return EnumerationDict.TryGetValue(id, out TEnum? enumeration) ? enumeration : default;
+            return EnumerationDict.TryGetValue(id, out TEnum enumeration) ? enumeration : default;
         }
 
-        public static TEnum? FromName(string name)
+        public static TEnum FromName(string name)
         {
             return EnumerationDict.Values.SingleOrDefault(e => e.Name == name);
         }
 
         public static IReadOnlyCollection<TEnum> GetValues() => EnumerationDict.Values.ToList();
 
-        public bool Equals(Enumeration<TEnum>? other)
+        public bool Equals(Enumeration<TEnum> other)
         {
             if (other == null)
                 return false;
@@ -51,7 +51,7 @@ namespace TemplateApi.Commons.Enums.Abstract
                 Id == other.Id;
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             return obj is Enumeration<TEnum> && Equals(obj);
         }

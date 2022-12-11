@@ -19,7 +19,7 @@ namespace TemplateApi.Persistence.Configurations.AuthDomain
                 .UsingEntity<RolePermission>();
 
             builder.HasMany(x => x.Credentials)
-                .WithMany();
+                .WithMany(x => x.Roles);
 
             builder.HasData(Role.GetValues());
         }

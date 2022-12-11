@@ -35,14 +35,19 @@ namespace Auth.Domain.Services.Concrete
         {
             var hashResult = _passwordHasher.Hash(password);
 
+            var registerRole = await _authRepository.GetRole(Role.Registered);
+
+            List<Role> roles = new();
+            roles.Add(registerRole);
+
             var entity = new UserCredential
             {
                 Iterations = hashResult.Iterations,
                 Login = login,
                 Salt = hashResult.Salt,
-                PasswordBytes = hashResult.Key
+                PasswordBytes = hashResult.Key,
+                Roles = roles
             };
-            entity.Roles.Add(Role.Registered);
             await _authRepository.Add(entity, cancellationToken);
 
             await _authRepository.SaveChangesAsync(cancellationToken);

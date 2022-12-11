@@ -9,10 +9,10 @@ using TemplateApi.Persistence.DbContexts.Application;
 
 #nullable disable
 
-namespace TemplateApi.Persistence.Migrations
+namespace TemplateApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221206194912_Init")]
+    [Migration("20221211135832_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace TemplateApi.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Domain.Entities.User", b =>
+            modelBuilder.Entity("Core.Domain.Schemas.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

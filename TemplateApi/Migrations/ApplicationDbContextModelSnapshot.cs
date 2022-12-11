@@ -8,7 +8,7 @@ using TemplateApi.Persistence.DbContexts.Application;
 
 #nullable disable
 
-namespace TemplateApi.Persistence.Migrations
+namespace TemplateApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace TemplateApi.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Core.Domain.Entities.User", b =>
+            modelBuilder.Entity("Core.Domain.Schemas.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

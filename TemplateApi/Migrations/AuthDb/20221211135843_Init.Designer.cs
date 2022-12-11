@@ -9,10 +9,10 @@ using TemplateApi.Persistence.DbContexts.Auth;
 
 #nullable disable
 
-namespace TemplateApi.Persistence.Migrations.AuthDb
+namespace TemplateApi.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20221206194930_Init")]
+    [Migration("20221211135843_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Auth.Domain.Entities.Permission", b =>
+            modelBuilder.Entity("Auth.Domain.Schemas.Entities.Permission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                         });
                 });
 
-            modelBuilder.Entity("Auth.Domain.Entities.Role", b =>
+            modelBuilder.Entity("Auth.Domain.Schemas.Entities.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                         });
                 });
 
-            modelBuilder.Entity("Auth.Domain.Entities.RolePermission", b =>
+            modelBuilder.Entity("Auth.Domain.Schemas.Entities.RolePermission", b =>
                 {
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -112,16 +112,11 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                         new
                         {
                             RoleId = 1,
-                            PermissionId = 1
-                        },
-                        new
-                        {
-                            RoleId = 1,
                             PermissionId = 2
                         });
                 });
 
-            modelBuilder.Entity("Auth.Domain.Entities.UserCredential", b =>
+            modelBuilder.Entity("Auth.Domain.Schemas.Entities.UserCredential", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,25 +151,25 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                     b.Property<Guid>("CredentialsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int>("RolesId")
                         .HasColumnType("int");
 
-                    b.HasKey("CredentialsId", "RoleId");
+                    b.HasKey("CredentialsId", "RolesId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RolesId");
 
                     b.ToTable("RoleUserCredential", "Auth");
                 });
 
-            modelBuilder.Entity("Auth.Domain.Entities.RolePermission", b =>
+            modelBuilder.Entity("Auth.Domain.Schemas.Entities.RolePermission", b =>
                 {
-                    b.HasOne("Auth.Domain.Entities.Permission", null)
+                    b.HasOne("Auth.Domain.Schemas.Entities.Permission", null)
                         .WithMany()
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Auth.Domain.Entities.Role", null)
+                    b.HasOne("Auth.Domain.Schemas.Entities.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -183,15 +178,15 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
 
             modelBuilder.Entity("RoleUserCredential", b =>
                 {
-                    b.HasOne("Auth.Domain.Entities.UserCredential", null)
+                    b.HasOne("Auth.Domain.Schemas.Entities.UserCredential", null)
                         .WithMany()
                         .HasForeignKey("CredentialsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Auth.Domain.Entities.Role", null)
+                    b.HasOne("Auth.Domain.Schemas.Entities.Role", null)
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

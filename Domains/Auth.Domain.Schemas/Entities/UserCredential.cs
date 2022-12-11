@@ -5,7 +5,7 @@ namespace Auth.Domain.Schemas.Entities
 {
     public sealed class UserCredential : EntityBase<Guid>
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public new Guid Id { get; set; } = Guid.NewGuid();
         public string Login { get; set; }
         public string Salt { get; set; }
         [Column("Password")]

@@ -38,5 +38,8 @@ namespace Auth.Domain.Repositories.Concrete
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
             => await _dbContext.SaveChangesAsync(cancellationToken);
+
+        public async Task<Role> GetRole(Role role)
+            => await _dbContext.Set<Role>().SingleOrDefaultAsync(x => x.Id.Equals(role.Id));
     }
 }

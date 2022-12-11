@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace TemplateApi.Persistence.Migrations.AuthDb
+namespace TemplateApi.Migrations.AuthDb
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -93,14 +93,14 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                 columns: table => new
                 {
                     CredentialsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    RolesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleUserCredential", x => new { x.CredentialsId, x.RoleId });
+                    table.PrimaryKey("PK_RoleUserCredential", x => new { x.CredentialsId, x.RolesId });
                     table.ForeignKey(
-                        name: "FK_RoleUserCredential_Roles_RoleId",
-                        column: x => x.RoleId,
+                        name: "FK_RoleUserCredential_Roles_RolesId",
+                        column: x => x.RolesId,
                         principalSchema: "Auth",
                         principalTable: "Roles",
                         principalColumn: "Id",
@@ -137,11 +137,7 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                 schema: "Auth",
                 table: "RolePermission",
                 columns: new[] { "PermissionId", "RoleId" },
-                values: new object[,]
-                {
-                    { 1, 1 },
-                    { 2, 1 }
-                });
+                values: new object[] { 2, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermission_PermissionId",
@@ -150,10 +146,10 @@ namespace TemplateApi.Persistence.Migrations.AuthDb
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleUserCredential_RoleId",
+                name: "IX_RoleUserCredential_RolesId",
                 schema: "Auth",
                 table: "RoleUserCredential",
-                column: "RoleId");
+                column: "RolesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserCredentials_Login",
