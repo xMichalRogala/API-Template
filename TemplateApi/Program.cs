@@ -1,3 +1,5 @@
+using Auth.Domain.Attributes;
+using Auth.Domain.Schemas.Enums;
 using TemplateApi.Configuration.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,5 +24,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.AddCustomMiddlewares();
 app.AddCustomEndpoints();
+
+
+app.MapGet("/readPerm", [HasPermission(Permission.Read)]() => "Hello World!");
+
+app.MapGet("/accessPerm", [HasPermission(Permission.Access)] () => "Hello World!");
 
 app.Run();

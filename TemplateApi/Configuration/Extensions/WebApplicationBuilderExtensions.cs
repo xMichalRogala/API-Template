@@ -17,7 +17,7 @@ namespace TemplateApi.Configuration.Extensions
             builder.Services.TryAddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             builder.Services.TryAddScoped<IUnitOfWork, UnitOfWork>();
 
-            AddServicesFromEndpoints(builder.Services);
+            AddServicesFromEndpoints(builder);
 
             return builder;
         }
@@ -56,7 +56,7 @@ namespace TemplateApi.Configuration.Extensions
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        private static void AddServicesFromEndpoints(IServiceCollection services)
+        private static void AddServicesFromEndpoints(WebApplicationBuilder builder)
         {
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -66,7 +66,7 @@ namespace TemplateApi.Configuration.Extensions
                 foreach (var endpointType in endpointTypes)
                 {
                     endpointType.GetMethod(nameof(IEndpoints.AddServices))
-                        !.Invoke(null, new object[] { services });
+                        !.Invoke(null, new object[] { builder.Services, builder.Configuration });
                 }
             }
         }

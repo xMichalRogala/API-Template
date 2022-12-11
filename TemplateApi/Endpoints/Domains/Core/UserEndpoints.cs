@@ -7,7 +7,7 @@ namespace TemplateApi.Endpoints.Domains.Core
     {
         private const string EndpointName = "Users";
         private const string ContentType = "application/json";
-        public static void AddServices(IServiceCollection services)
+        public static void AddServices(IServiceCollection services, IConfiguration configuration = default)
         {
 
         }

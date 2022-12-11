@@ -16,7 +16,7 @@ public class PermissionService : IPermissionService
     
     public async Task<HashSet<string>> GetPermissionsAsync(Guid userCredentialId)
     {
-        var roles = await _context.Set<UserCredential>()
+        var roles = await _context.Set<UserCredential>() //todo probably better would be to cache service
             .Include(x => x.Roles)
             .ThenInclude(r => r.Permissions)
             .Where(x => x.Id == userCredentialId)

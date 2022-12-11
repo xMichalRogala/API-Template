@@ -1,4 +1,5 @@
-﻿using Auth.Domain.Schemas.Entities;
+﻿using Auth.Domain.Schemas.Enums;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 
 namespace  Auth.Domain.Attributes
@@ -7,7 +8,7 @@ namespace  Auth.Domain.Attributes
     {
         public HasPermissionAttribute(Permission permission) : base(policy: permission.ToString()) 
         {
-        
+
         }
     }
 }
