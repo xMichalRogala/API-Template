@@ -14,7 +14,6 @@ namespace TemplateApi.Persistence.Configurations.AuthDomain
             builder.HasKey(x => new { x.RoleId, x.PermissionId });
 
             builder.HasData(
-                Create(Role.Registered, Permission.Access),
                 Create(Role.Registered, Permission.Read));
         }
 

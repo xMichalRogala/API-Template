@@ -1,4 +1,5 @@
-﻿using Auth.Domain.Hashing.Abstract;
+﻿using Auth.Domain.Authorization;
+using Auth.Domain.Hashing.Abstract;
 using Auth.Domain.Hashing.Concrete;
 using Auth.Domain.Jwt;
 using Auth.Domain.OptionsSetup;
@@ -8,6 +9,7 @@ using Auth.Domain.Schemas.Models;
 using Auth.Domain.Services.Abstract;
 using Auth.Domain.Services.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TemplateApi.Commons.Endpoints.Abstract;
 
@@ -29,6 +31,8 @@ namespace TemplateApi.Endpoints.Domains.Auth
             services.ConfigureOptions<JwtOptionsSetup>();
             services.ConfigureOptions<JwtBearerOptionsSetup>();
             services.AddAuthorization();
+            services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
         }
 
         public static void DefineEndpoints(IEndpointRouteBuilder app)

@@ -1,24 +1,31 @@
 ﻿using Auth.Domain.Authorization.Abstract;
-using Auth.Domain.Repositories.Abstract;
+using Auth.Domain.Schemas.Entities;
+using Microsoft.EntityFrameworkCore;
 using TemplateApi.Persistence.DbContexts.Auth;
 
 namespace Auth.Domain.Authorization;
 
 public class PermissionService : IPermissionService
 {
-    // private readonly AuthDbContext _context;
-    //
-    // public PermissionService(IAuthRepository authRepository)
-    // {
-    //     _authRepository = authRepository;
-    // }
-    //
-    // public Task<HashSet<string>> GetPermissionsAsync(Guid userCredentialId)
-    // {
-    //     var roles = await _context.Set
-    // }
-    public Task<HashSet<string>> GetPermissionsAsync(Guid userCredentialId)
+    private readonly AuthDbContext _context;
+    
+    public PermissionService(AuthDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+    
+    public async Task<HashSet<string>> GetPermissionsAsync(Guid userCredentialId)
+    {
+        var roles = await _context.Set<UserCredential>()
+            .Include(x => x.Roles)
+            .ThenInclude(r => r.Permissions)
+            .Where(x => x.Id == userCredentialId)
+            .Select(x => x.Roles)
+            .ToArrayAsync();
+
+        return roles.SelectMany(x => x)
+            .SelectMany(x => x.Permissions)
+            .Select(x => x.Name)
+            .ToHashSet();
     }
 }

@@ -11,5 +11,6 @@ namespace Auth.Domain.Schemas.Entities
         [Column("Password")]
         public byte[] PasswordBytes { get; set; }
         public int Iterations { get; set; }
+        public ICollection<Role> Roles { get; set; }
     }
 }

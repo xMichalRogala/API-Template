@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using TemplateApi.Application.Abstract;
-using TemplateApi.Common.Data;
 using TemplateApi.Commons.Data.Repository;
 using TemplateApi.Commons.Endpoints.Abstract;
 using TemplateApi.Persistence;

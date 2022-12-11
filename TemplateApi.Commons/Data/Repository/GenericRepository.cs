@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using TemplateApi.Commons.Data.Repository;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using TemplateApi.Commons.Entity.Abstract;
 
-namespace TemplateApi.Common.Data
+namespace TemplateApi.Commons.Data.Repository
 {
     public class GenericRepository<T, TKey> : IGenericRepository<T, TKey> where T : EntityBase<TKey>
     {
