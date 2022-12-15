@@ -18,7 +18,7 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Auth.Messages\Auth.Messages.csproj" />
 	  <ProjectReference Include="..\..\TemplateApi.Persistence\TemplateApi.Persistence.csproj" />
+	  <ProjectReference Include="..\Auth.Domain.Messages\Auth.Domain.Messages.csproj" />
 	</ItemGroup>
 </Project>

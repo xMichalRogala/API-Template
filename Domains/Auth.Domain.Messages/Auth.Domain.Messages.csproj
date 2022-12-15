@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TemplateApi.CQRS\TemplateApi.CQRS.csproj" />
+    <ProjectReference Include="..\..\TemplateApi.CQRS\TemplateApi.CQRS.csproj" />
   </ItemGroup>
 
 </Project>

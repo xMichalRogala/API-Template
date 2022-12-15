@@ -1,6 +1,5 @@
 using Auth.Domain.Attributes;
 using Auth.Domain.Schemas.Enums;
-using Auth.Messages.Commands;
 using TemplateApi.Configuration.Extensions;
 using TemplateApi.CQRS.Commands.Abstract;
 using TemplateApi.CQRS.Extensions;
@@ -32,13 +31,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.AddCustomMiddlewares();
 app.AddCustomEndpoints();
-
-
-app.MapGet("/readPerm", [HasPermission(Permission.Read)] async (ICommandDispatcher commandDispatcher) =>
-{
-    await commandDispatcher.DispatchAsync(new CommandTest());
-});
-
-app.MapGet("/accessPerm", [HasPermission(Permission.Access)] () => "Hello World!");
 
 app.Run();

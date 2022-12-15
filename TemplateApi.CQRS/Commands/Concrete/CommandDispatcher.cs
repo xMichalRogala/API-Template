@@ -16,7 +16,7 @@ namespace TemplateApi.CQRS.Commands.Concrete
             _options = options.Value;
         }
 
-        public Task DispatchAsync<T>(T command, CancellationToken cancellationToken = default) where T : ICommand
+        public async Task DispatchAsync<T>(T command, CancellationToken cancellationToken = default) where T : ICommand
         {
             ParallelOptions parallelOptions = new();
             parallelOptions.CancellationToken = cancellationToken;
@@ -31,11 +31,13 @@ namespace TemplateApi.CQRS.Commands.Concrete
 
                 CheckRulesAboutProcessingComands(commandHandlers);
 
-                return Task.Run(() => Parallel.ForEach(commandHandlers, parallelOptions, x => x.ExecuteAsync(command, cancellationToken)));
+                await Task.WhenAll(commandHandlers.Select(async x => await x.ExecuteAsync(command, cancellationToken)));
+
+                //Task.Run(() => Parallel.ForEach(commandHandlers, parallelOptions, x => x.ExecuteAsync(command, cancellationToken))).Wait();
             }
         }
 
-        private void CheckRulesAboutProcessingComands<T>(IEnumerable<ICommandHandler<T>> commandHandlers)
+        private void CheckRulesAboutProcessingComands<T>(IEnumerable<ICommandHandler<T>> commandHandlers) where T : ICommand
         {
             if (!_options.AllowCommandExecuteByMoreThanOneCommandHandler && commandHandlers.Count() > 1)
                 throw new InvalidOperationException($"Command Dispatcher has set option to process one type command to only one command handler! CommandType: {typeof(T)}");

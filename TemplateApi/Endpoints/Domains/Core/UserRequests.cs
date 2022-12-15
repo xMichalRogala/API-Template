@@ -1,15 +1,16 @@
-﻿using Auth.Domain.Services.Abstract;
+﻿using Auth.Domain.Messages.Commands;
 using Core.Domain.Schemas.Entities;
 using Core.Domain.Schemas.Models;
 using Microsoft.AspNetCore.Mvc;
 using TemplateApi.Application.Abstract;
+using TemplateApi.CQRS.Commands.Abstract;
 
 namespace TemplateApi.Endpoints.Domains.Core
 {
     public abstract class UserRequests
     {
         public static async Task<IResult> Create([FromBody] UserDto userDto,
-            IAuthService authService,
+            ICommandDispatcher commandDispatcher,
             IUnitOfWork unitOfWork,
             CancellationToken cancellationToken)
         {
@@ -18,17 +19,18 @@ namespace TemplateApi.Endpoints.Domains.Core
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Login = userDto.Login
-            };
+            };    
+
             await unitOfWork.userRepository.Add(user, cancellationToken);
 
-            await authService.SaveUserCredentials(userDto.Login, userDto.Password, cancellationToken);
+            await commandDispatcher.DispatchAsync(new CreateUserCredentialCommand(userDto.Login, userDto.Password), cancellationToken);
 
             var resultOfWork = await unitOfWork.Complete(cancellationToken);
 
             if (!resultOfWork)
-                await authService.RemoveUserCredentials(userDto.Login, cancellationToken);
+                await commandDispatcher.DispatchAsync(new RemoveUserCredentialCommand(userDto.Login), cancellationToken);
 
-            return Results.Ok();
+            return resultOfWork ? Results.Ok() : Results.BadRequest();
         }
     }
 }
