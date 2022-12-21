@@ -15,33 +15,34 @@ namespace TemplateApi.Migrations
                 name: "Core");
 
             migrationBuilder.CreateTable(
-                name: "Users12",
+                name: "Users",
                 schema: "Core",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Login = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users12", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users12_Login",
+                name: "IX_Users_Login",
                 schema: "Core",
-                table: "Users12",
+                table: "Users",
                 column: "Login",
-                unique: true);
+                unique: true,
+                filter: "[Login] IS NOT NULL");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Users12",
+                name: "Users",
                 schema: "Core");
         }
     }

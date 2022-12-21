@@ -32,7 +32,6 @@ namespace TemplateApi.Migrations.AuthDb
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -76,7 +75,6 @@ namespace TemplateApi.Migrations.AuthDb
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -123,22 +121,20 @@ namespace TemplateApi.Migrations.AuthDb
                         .HasColumnType("int");
 
                     b.Property<string>("Login")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<byte[]>("PasswordBytes")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)")
                         .HasColumnName("Password");
 
                     b.Property<string>("Salt")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Login")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[Login] IS NOT NULL");
 
                     b.ToTable("UserCredentials", "Auth");
                 });

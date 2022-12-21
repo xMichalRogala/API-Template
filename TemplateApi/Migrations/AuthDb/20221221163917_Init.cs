@@ -23,7 +23,7 @@ namespace TemplateApi.Migrations.AuthDb
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,7 @@ namespace TemplateApi.Migrations.AuthDb
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,9 +50,9 @@ namespace TemplateApi.Migrations.AuthDb
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Iterations = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -156,7 +156,8 @@ namespace TemplateApi.Migrations.AuthDb
                 schema: "Auth",
                 table: "UserCredentials",
                 column: "Login",
-                unique: true);
+                unique: true,
+                filter: "[Login] IS NOT NULL");
         }
 
         /// <inheritdoc />

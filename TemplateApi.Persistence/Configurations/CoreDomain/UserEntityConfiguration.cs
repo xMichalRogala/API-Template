@@ -9,7 +9,7 @@ namespace TemplateApi.Persistence.Configurations.CoreDomain
         private const string _userSchema = "Core";
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Users12", _userSchema);
+            builder.ToTable("Users", _userSchema);
 
             builder.HasIndex(x => x.Login)
                 .IsUnique();

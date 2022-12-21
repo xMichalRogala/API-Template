@@ -12,7 +12,7 @@ using TemplateApi.Persistence.DbContexts.Application;
 namespace TemplateApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221211135832_Init")]
+    [Migration("20221221163906_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -32,23 +32,21 @@ namespace TemplateApi.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Login")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Login")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[Login] IS NOT NULL");
 
-                    b.ToTable("Users12", "Core");
+                    b.ToTable("Users", "Core");
                 });
 #pragma warning restore 612, 618
         }
