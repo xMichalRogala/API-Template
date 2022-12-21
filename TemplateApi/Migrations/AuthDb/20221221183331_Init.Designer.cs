@@ -12,7 +12,7 @@ using TemplateApi.Persistence.DbContexts.Auth;
 namespace TemplateApi.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20221221163917_Init")]
+    [Migration("20221221183331_Init")]
     partial class Init
     {
         /// <inheritdoc />
