@@ -27,7 +27,7 @@ namespace TemplateApi.Configuration.Extensions
             builder.Services.AddDbContext<AuthDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetSection("Auth:ConnectionString")?.Value, 
-                    b => b.MigrationsAssembly("TemplateApi"));
+                    b => b.MigrationsAssembly(Assembly.GetEntryAssembly().GetName().Name));
 
                 if (builder.Environment.IsDevelopment())
                     EnableEfDebugOptions(options);
@@ -41,7 +41,7 @@ namespace TemplateApi.Configuration.Extensions
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"), 
-                    b => b.MigrationsAssembly("TemplateApi"));
+                    b => b.MigrationsAssembly(Assembly.GetEntryAssembly().GetName().Name));
 
                 if (builder.Environment.IsDevelopment())
                     EnableEfDebugOptions(options);
