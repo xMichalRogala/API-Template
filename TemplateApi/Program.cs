@@ -30,4 +30,6 @@ app.MapGet("/readPerm", [HasPermission(Permission.Read)]() => "Hello World!");
 
 app.MapGet("/accessPerm", [HasPermission(Permission.Access)] () => "Hello World!");
 
+app.MapGet("/accessWithoutPerm", () => "Hello World!");
+
 app.Run();
