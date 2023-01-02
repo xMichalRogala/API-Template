@@ -4,7 +4,7 @@ using TemplateApi.Commons.Entity.Abstract;
 
 namespace TemplateApi.Commons.Data.Repository
 {
-    public class GenericRepository<T, TKey> : IGenericRepository<T, TKey> where T : EntityBase<TKey>
+    public class GenericRepository<T, TKey> : IGenericRepository<T, TKey> where T : class, IEntityBase<TKey>
     {
         private readonly DbContext _dbContext;
         private readonly DbSet<T> _entities;

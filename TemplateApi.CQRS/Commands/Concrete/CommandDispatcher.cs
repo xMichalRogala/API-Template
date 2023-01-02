@@ -18,11 +18,6 @@ namespace TemplateApi.CQRS.Commands.Concrete
 
         public async Task DispatchAsync<T>(T command, CancellationToken cancellationToken = default) where T : ICommand
         {
-            ParallelOptions parallelOptions = new();
-            parallelOptions.CancellationToken = cancellationToken;
-
-            parallelOptions.MaxDegreeOfParallelism = _options?.MaxDegreeOfParaleism ?? -1;
-
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var serviceProvider = scope.ServiceProvider;
@@ -32,8 +27,6 @@ namespace TemplateApi.CQRS.Commands.Concrete
                 CheckRulesAboutProcessingComands(commandHandlers);
 
                 await Task.WhenAll(commandHandlers.Select(async x => await x.ExecuteAsync(command, cancellationToken)));
-
-                //Task.Run(() => Parallel.ForEach(commandHandlers, parallelOptions, x => x.ExecuteAsync(command, cancellationToken))).Wait();
             }
         }
 

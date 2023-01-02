@@ -3,9 +3,9 @@ using TemplateApi.Commons.Entity.Abstract;
 
 namespace Auth.Domain.Schemas.Entities
 {
-    public sealed class UserCredential : EntityBase<Guid>
+    public sealed class UserCredential : IEntityBase<Guid>
     {
-        public new Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Login { get; set; }
         public string Salt { get; set; }
         [Column("Password")]

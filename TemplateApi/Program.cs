@@ -1,7 +1,4 @@
-using Auth.Domain.Attributes;
-using Auth.Domain.Schemas.Enums;
 using TemplateApi.Configuration.Extensions;
-using TemplateApi.CQRS.Commands.Abstract;
 using TemplateApi.CQRS.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +9,9 @@ builder.Services.AddSwaggerGen();
 builder.AddCustomServices();
 builder.AddAuthDbContext();
 builder.AddApplicationDbContext();
-builder.Services.AddCustomCqrs(commandOptions =>
+builder.Services.AddCustomCqrs(opt =>
 {
-    commandOptions.MaxDegreeOfParaleism = 5;
-    commandOptions.AllowCommandExecuteByMoreThanOneCommandHandler = true;
+    opt.AllowCommandExecuteByMoreThanOneCommandHandler = false;
 });
 var app = builder.Build();
 

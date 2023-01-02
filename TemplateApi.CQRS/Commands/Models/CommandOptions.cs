@@ -2,7 +2,6 @@
 {
     public class CommandOptions
     {
-        public int? MaxDegreeOfParaleism { get; set; }
         public bool AllowCommandExecuteByMoreThanOneCommandHandler { get; set; }
     }
 }

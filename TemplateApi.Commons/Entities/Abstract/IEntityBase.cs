@@ -1,6 +1,6 @@
 ﻿namespace TemplateApi.Commons.Entity.Abstract
 {
-    public abstract class EntityBase<TKey>
+    public interface IEntityBase<TKey>
     {
         public  TKey Id { get; set; }
     }
