@@ -8,7 +8,7 @@ namespace TemplateApi.CQRS.Events.Concrete
 {
     public class EventQueueManager
     {
-        private readonly EventDispatcher _eventDispatcher;
+        private readonly IEventDispatcher _eventDispatcher;
         private readonly ConcurrentBag<IEvent> _events = new ConcurrentBag<IEvent>();
         private readonly CancellationTokenSource _cancellationTokenSource;
         private readonly EventOptions _eventOptions;
@@ -16,7 +16,7 @@ namespace TemplateApi.CQRS.Events.Concrete
         private readonly ILogger<EventQueueManager> _logger;
         public bool IsManagerWorking { get; private set; } = false;
 
-        public EventQueueManager(EventDispatcher eventDispatcher, IOptions<EventOptions> eventOptions, ILogger<EventQueueManager> logger)
+        public EventQueueManager(IEventDispatcher eventDispatcher, IOptions<EventOptions> eventOptions, ILogger<EventQueueManager> logger)
         {
             _eventDispatcher = eventDispatcher;
             _cancellationTokenSource = new CancellationTokenSource();
@@ -31,7 +31,7 @@ namespace TemplateApi.CQRS.Events.Concrete
             return Task.CompletedTask;
         }
 
-        public void StartWork()
+        public async Task StartWorkAsync()
         {
             _logger.LogInformation($"{nameof(EventQueueManager)} is running");
 
@@ -39,7 +39,8 @@ namespace TemplateApi.CQRS.Events.Concrete
 
             while(true)
             {
-                if(_cancellationTokenSource.IsCancellationRequested)
+                _logger.LogInformation($"{nameof(EventQueueManager)} is running");
+                if (_cancellationTokenSource.IsCancellationRequested)
                 {
                     Task tasks = Task.WhenAll(_tasks);
 
@@ -53,7 +54,6 @@ namespace TemplateApi.CQRS.Events.Concrete
                     }
 
                     IsManagerWorking= false;
-                    return;
                 }
 
                 if(_tasks.Count < _eventOptions.ParallelDegree && _events.Count > 0)
@@ -76,7 +76,7 @@ namespace TemplateApi.CQRS.Events.Concrete
                     }
                 }
 
-                Task.Delay(_eventOptions.Delay);
+                await Task.Delay(_eventOptions.Delay);
             }
         }
 

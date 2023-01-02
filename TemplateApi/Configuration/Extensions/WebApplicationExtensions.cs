@@ -1,4 +1,5 @@
 ﻿using TemplateApi.Commons.Endpoints.Abstract;
+using TemplateApi.CQRS.Events.Concrete;
 using TemplateApi.Middlewares;
 
 namespace TemplateApi.Configuration.Extensions
@@ -25,6 +26,15 @@ namespace TemplateApi.Configuration.Extensions
                         !.Invoke(null, new object[] { application });
                 }
             }
+        }
+
+        public static WebApplication AddCustomBackgroundTasks(this WebApplication application)
+        {
+            var eventQueueManager = application.Services.GetRequiredService<EventQueueManager>();
+
+            eventQueueManager.StartWorkAsync();
+
+            return application;
         }
     }
 }

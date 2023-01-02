@@ -3,6 +3,9 @@ using TemplateApi.Commons.Assemblies;
 using TemplateApi.CQRS.Commands.Abstract;
 using TemplateApi.CQRS.Commands.Concrete;
 using TemplateApi.CQRS.Commands.Models;
+using TemplateApi.CQRS.Events.Abstract;
+using TemplateApi.CQRS.Events.Concrete;
+using TemplateApi.CQRS.Events.Models;
 using TemplateApi.CQRS.Queries.Abstract;
 using TemplateApi.CQRS.Queries.Concrete;
 
@@ -12,7 +15,7 @@ namespace TemplateApi.CQRS.Extensions
     {
         private static IServiceCollection AddHandlersToServices(this IServiceCollection services, Type handlerType)
         {
-            var assemblies = LoadAllAssemblies.Get(); //create cache assemblies contaieer as singleton
+            var assemblies = LoadAllAssemblies.Get(); //todo create cache assemblies contaieer as singleton
 
             foreach (var assembly in assemblies)
             {
@@ -44,10 +47,24 @@ namespace TemplateApi.CQRS.Extensions
             return services;
         }
 
-        public static IServiceCollection AddCustomCqrs(this IServiceCollection services, Action<CommandOptions> opt)
+        private static IServiceCollection AddEvents(this IServiceCollection services, Action<EventOptions> opt)
         {
-            services.AddCommands(opt);
+            services.AddSingleton<IEventDispatcher, EventDispatcher>();
+            services.AddHandlersToServices(typeof(IEventHandler<>));
+            services.AddSingleton<EventQueueManager>();
+            services.AddOptions<EventOptions>().Configure(opt);
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomCqrs(
+            this IServiceCollection services, 
+            Action<CommandOptions> commandOptions, 
+            Action<EventOptions> eventOptions)
+        {
+            services.AddCommands(commandOptions);
             services.AddQueries();
+            services.AddEvents(eventOptions);
 
             return services;
         }

@@ -9,10 +9,15 @@ builder.Services.AddSwaggerGen();
 builder.AddCustomServices();
 builder.AddAuthDbContext();
 builder.AddApplicationDbContext();
-builder.Services.AddCustomCqrs(opt =>
+builder.Services.AddCustomCqrs(commandOpt =>
 {
-    opt.AllowCommandExecuteByMoreThanOneCommandHandler = false;
+    commandOpt.AllowCommandExecuteByMoreThanOneCommandHandler = false;
+}, eventOpt =>
+{
+    eventOpt.ParallelDegree = 2;
+    eventOpt.Delay = 5000;
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,5 +32,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.AddCustomMiddlewares();
 app.AddCustomEndpoints();
+
+app.AddCustomBackgroundTasks();
 
 app.Run();
