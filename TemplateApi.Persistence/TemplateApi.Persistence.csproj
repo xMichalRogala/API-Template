@@ -10,6 +10,7 @@
     <ProjectReference Include="..\Domains\Auth.Domain.Schemas\Auth.Domain.Schemas.csproj" />
     <ProjectReference Include="..\Domains\Core.Domain.Schemas\Core.Domain.Schemas.csproj" />
     <ProjectReference Include="..\TemplateApi.Application\TemplateApi.Application.csproj" />
+    <ProjectReference Include="..\TemplateApi.CQRS\TemplateApi.CQRS.csproj" />
   </ItemGroup>
 
   <ItemGroup>

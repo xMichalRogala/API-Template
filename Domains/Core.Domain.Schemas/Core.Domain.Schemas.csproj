@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\TemplateApi.Commons\TemplateApi.Commons.csproj" />
+      <ProjectReference Include="..\..\TemplateApi.CQRS\TemplateApi.CQRS.csproj" />
     </ItemGroup>
 
 </Project>

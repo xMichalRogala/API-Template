@@ -31,6 +31,14 @@ namespace TemplateApi.CQRS.Events.Concrete
             return Task.CompletedTask;
         }
 
+        public async Task AddEventsToQueue(IEnumerable<IEvent> events)
+        {
+            foreach(var @event in events)
+            {
+                await AddEventToQueue(@event);
+            }
+        }
+
         public async Task StartWorkAsync()
         {
             _logger.LogInformation($"{nameof(EventQueueManager)} is running");

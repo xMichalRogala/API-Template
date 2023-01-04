@@ -7,6 +7,7 @@ using TemplateApi.Commons.Endpoints.Abstract;
 using TemplateApi.Persistence;
 using TemplateApi.Persistence.DbContexts.Application;
 using TemplateApi.Persistence.DbContexts.Auth;
+using TemplateApi.Persistence.Interceptors;
 
 namespace TemplateApi.Configuration.Extensions
 {
@@ -38,14 +39,17 @@ namespace TemplateApi.Configuration.Extensions
 
         public static WebApplicationBuilder AddApplicationDbContext(this WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddSingleton<AddEventsToQueueEventManagerInterceptor>();
+
+            builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"), 
-                    b => b.MigrationsAssembly(typeof(Program).Assembly.GetName().Name));
+                    b => b.MigrationsAssembly(typeof(Program).Assembly.GetName().Name))
+                .AddInterceptors(sp.GetService<AddEventsToQueueEventManagerInterceptor>());
 
                 if (builder.Environment.IsDevelopment())
                     EnableEfDebugOptions(options);
-            });
+            });         
 
             return builder;
         }
