@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TemplateApi.Application\TemplateApi.Application.csproj" />
     <ProjectReference Include="..\..\TemplateApi.Commons\TemplateApi.Commons.csproj" />
+    <ProjectReference Include="..\Auth.Domain.Messages\Auth.Domain.Messages.csproj" />
+    <ProjectReference Include="..\Core.Domain.Schemas\Core.Domain.Schemas.csproj" />
   </ItemGroup>
 
 </Project>

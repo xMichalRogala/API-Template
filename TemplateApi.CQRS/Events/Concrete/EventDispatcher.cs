@@ -12,7 +12,7 @@ namespace TemplateApi.CQRS.Events.Concrete
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        public async Task DispatchAsync<T>(T @event, CancellationToken cancellationToken) where T : IEvent
+        public async Task DispatchAsync<T>(T @event, CancellationToken cancellationToken = default) where T : IEvent
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {

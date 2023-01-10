@@ -74,6 +74,8 @@ namespace TemplateApi.CQRS.Events.Concrete
                                 await _eventDispatcher.DispatchAsync(@event, _cancellationTokenSource.Token);
                         }    
                     });
+
+                    _tasks.Add(task);
                 }
                 else
                 {
