@@ -33,6 +33,4 @@ app.UseAuthorization();
 app.AddCustomMiddlewares();
 app.AddCustomEndpoints();
 
-app.AddCustomBackgroundTasks();
-
 app.Run();

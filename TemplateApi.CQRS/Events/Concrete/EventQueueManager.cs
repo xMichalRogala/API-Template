@@ -39,7 +39,7 @@ namespace TemplateApi.CQRS.Events.Concrete
             }
         }
 
-        public async Task StartWorkAsync()
+        public async Task StartWorkAsync(CancellationToken cancellationToken = default)
         {
             _logger.LogInformation($"{nameof(EventQueueManager)} is running");
 
@@ -48,7 +48,7 @@ namespace TemplateApi.CQRS.Events.Concrete
             while(true)
             {
                 _logger.LogInformation($"{nameof(EventQueueManager)} is running");
-                if (_cancellationTokenSource.IsCancellationRequested)
+                if (_cancellationTokenSource.IsCancellationRequested || cancellationToken.IsCancellationRequested)
                 {
                     Task tasks = Task.WhenAll(_tasks);
 
@@ -71,7 +71,10 @@ namespace TemplateApi.CQRS.Events.Concrete
                         if(_events.TryTake(out IEvent? @event))
                         {
                             if (@event != null)
+                            {
+                                var eventType = @event.GetType();
                                 await _eventDispatcher.DispatchAsync(@event, _cancellationTokenSource.Token);
+                            }                           
                         }    
                     });
 

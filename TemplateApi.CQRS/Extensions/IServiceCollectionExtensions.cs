@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TemplateApi.Commons.Assemblies;
+using TemplateApi.CQRS.BackgroundServices;
 using TemplateApi.CQRS.Commands.Abstract;
 using TemplateApi.CQRS.Commands.Concrete;
 using TemplateApi.CQRS.Commands.Models;
@@ -53,6 +54,7 @@ namespace TemplateApi.CQRS.Extensions
             services.AddHandlersToServices(typeof(IEventHandler<>));
             services.AddSingleton<EventQueueManager>();
             services.AddOptions<EventOptions>().Configure(opt);
+            services.AddHostedService<EventQueueManagerHostedService>();
 
             return services;
         }
