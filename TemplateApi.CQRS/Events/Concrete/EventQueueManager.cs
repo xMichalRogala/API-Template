@@ -80,13 +80,9 @@ namespace TemplateApi.CQRS.Events.Concrete
 
                     _tasks.Add(task);
                 }
-                else
+                else if(_tasks.Count > 0)
                 {
-                    foreach (var task in _tasks)
-                    {
-                        if (task.IsCompleted)
-                            _tasks.Remove(task);
-                    }
+                    _tasks.RemoveAll(task => task.IsCompleted);
                 }
 
                 await Task.Delay(_eventOptions.Delay);
