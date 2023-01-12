@@ -17,10 +17,32 @@ namespace TemplateApi.CQRS.Events.Concrete
             using (var scope = _serviceScopeFactory.CreateScope())
             {
                 var serviceProvider = scope.ServiceProvider;
+                List<Task> tasks= new List<Task>();
+                var runTimeEventType = @event.GetType();
+                var eventHandlerType = typeof(IEventHandler<>).MakeGenericType(runTimeEventType);
 
-                var eventHandlers = serviceProvider.GetServices<IEventHandler<T>>().ToList();
+                var eventHandlers = serviceProvider.GetServices(eventHandlerType);
 
-                await Task.WhenAll(eventHandlers.Select(async x => await x.HandleAsync(@event, cancellationToken)));
+                foreach (var eventHandler in eventHandlers)
+                {
+                    if(eventHandler == null)
+                    {
+                        continue;
+                    }
+
+                    var method = eventHandler.GetType().GetMethod(nameof(IEventHandler<T>.HandleAsync));
+                    if (method != null)
+                    {
+                        var result = method.Invoke(eventHandler, new object[] { @event, cancellationToken }) as Task;
+
+                        if(result != null)
+                        {
+                            tasks.Add(result);
+                        }
+                    }
+                }
+
+                await Task.WhenAll(tasks);
             }
         }
     }
