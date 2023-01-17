@@ -41,13 +41,11 @@ namespace TemplateApi.CQRS.Events.Concrete
 
         public async Task StartWorkAsync(CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation($"{nameof(EventQueueManager)} is running");
-
-            IsManagerWorking= true;
+            _logger.LogInformation($"{nameof(EventQueueManager)} has started");
+            IsManagerWorking = true;
 
             while(true)
             {
-                _logger.LogInformation($"{nameof(EventQueueManager)} is running");
                 if (_cancellationTokenSource.IsCancellationRequested || cancellationToken.IsCancellationRequested)
                 {
                     Task tasks = Task.WhenAll(_tasks);
@@ -62,6 +60,7 @@ namespace TemplateApi.CQRS.Events.Concrete
                     }
 
                     IsManagerWorking= false;
+                    break;
                 }
 
                 if(_tasks.Count < _eventOptions.ParallelDegree && _events.Count > 0)
